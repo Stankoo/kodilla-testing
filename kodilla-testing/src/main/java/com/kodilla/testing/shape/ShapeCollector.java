@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ShapeCollector {
-    public List<Shape> shapes = new ArrayList<>();
+    List<Shape> shapes = new ArrayList<>();
 
     public ShapeCollector(List<Shape> shapes) {
         this.shapes = shapes;
@@ -21,21 +21,21 @@ class ShapeCollector {
     }
 
 
-    public void getFigure(int n) {
-
-
+    public Shape getFigure(int n) {
+        return shapes.get(n);
     }
 
     public String showFigures() {
 
         String result = "";
+        StringBuilder sB = new StringBuilder(result);
         for (int i = 0; i < shapes.size(); i++) {
-            result += shapes.get(i).getShapeName();
 
-            if (i < shapes.size() - 1)
-                result += ", ";
+            sB.append(shapes.get(i).getShapeName()+", ");
+
 
         }
+        result = sB.toString();
         return result;
     }
 

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ShapeCollectorTestSuite {
 
@@ -44,8 +46,8 @@ class ShapeCollectorTestSuite {
 
 
             //Then
-            Assertions.assertEquals(1, collector.shapes.size());
-            Assertions.assertEquals("Circle", circle.getShapeName());
+            assertEquals(1, collector.shapes.size());
+            assertEquals("Circle", circle.getShapeName());
 
         }
 
@@ -61,8 +63,8 @@ class ShapeCollectorTestSuite {
 
 
             //Then
-            Assertions.assertEquals(1, collector.shapes.size());
-            Assertions.assertEquals("Triangle", triangle.getShapeName());
+            assertEquals(1, collector.shapes.size());
+            assertEquals("Triangle", triangle.getShapeName());
 
         }
 
@@ -79,8 +81,8 @@ class ShapeCollectorTestSuite {
 
 
             //Then
-            Assertions.assertEquals(1, collector.shapes.size());
-            Assertions.assertEquals("Square", square.getShapeName());
+            assertEquals(1, collector.shapes.size());
+            assertEquals("Square", square.getShapeName());
 
         }
     }
@@ -101,8 +103,8 @@ class ShapeCollectorTestSuite {
             collector.removeFigure(circle);
 
             //Than
-            Assertions.assertFalse(collector.shapes.contains(circle));
-            Assertions.assertEquals(2, collector.shapes.size());
+           assertFalse(collector.shapes.contains(circle));
+            assertEquals(2, collector.shapes.size());
 
         }
 
@@ -120,8 +122,8 @@ class ShapeCollectorTestSuite {
             collector.removeFigure(triangle);
 
             //Than
-            Assertions.assertFalse(collector.shapes.contains(triangle));
-            Assertions.assertEquals(2, collector.shapes.size());
+            assertFalse(collector.shapes.contains(triangle));
+            assertEquals(2, collector.shapes.size());
 
         }
 
@@ -138,8 +140,8 @@ class ShapeCollectorTestSuite {
             collector.removeFigure(square);
 
             //Than
-            Assertions.assertFalse(collector.shapes.contains(square));
-            Assertions.assertEquals(2, collector.shapes.size());
+            assertFalse(collector.shapes.contains(square));
+            assertEquals(2, collector.shapes.size());
         }
 
         @Test
@@ -154,10 +156,10 @@ class ShapeCollectorTestSuite {
 
             //When
 
-            boolean result = collector.shapes.remove(square);
+            collector.removeFigure(square);
 
             //Than
-            Assertions.assertFalse(result);
+            assertEquals(2, collector.shapes.size());
 
         }
     }
@@ -170,9 +172,9 @@ class ShapeCollectorTestSuite {
         Circle circle = new Circle(5);
         collector.shapes.add(0, circle);
         //When
-        collector.getFigure(0);
+       Shape result = collector.getFigure(0);
         //Than
-        Assertions.assertEquals(circle, collector.shapes.get(0));
+        assertEquals(circle, result);
     }
 
     @DisplayName(" showFigures should return names of all figures in the list as one String")
@@ -193,7 +195,7 @@ class ShapeCollectorTestSuite {
         String result = collector.showFigures();
 
         //Than
-        Assertions.assertEquals("Circle, Square, Triangle", result);
+        assertEquals("Circle, Square, Triangle, ", result);
     }
 
     @Test
@@ -207,7 +209,7 @@ class ShapeCollectorTestSuite {
         String result = collector.showFigures();
 
         //Than
-        Assertions.assertEquals("", result);
+        assertEquals("", result);
 
 
     }
