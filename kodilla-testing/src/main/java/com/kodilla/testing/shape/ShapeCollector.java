@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ShapeCollector {
+
     List<Shape> shapes = new ArrayList<>();
 
     public ShapeCollector(List<Shape> shapes) {
