@@ -195,7 +195,7 @@ class ShapeCollectorTestSuite {
         String result = collector.showFigures();
 
         //Than
-        assertEquals("Circle, Square, Triangle, ", result);
+        assertEquals("Circle, Square, Triangle", result);
     }
 
     @Test

@@ -31,10 +31,14 @@ class ShapeCollector {
         String result = "";
         StringBuilder sB = new StringBuilder(result);
         for (int i = 0; i < shapes.size(); i++) {
+            if (i == shapes.size() - 1) {
+                sB.append(shapes.get(i).getShapeName());
 
-            sB.append(shapes.get(i).getShapeName()+", ");
+            } else {
+                sB.append(shapes.get(i).getShapeName());
+                sB.append(", ");
 
-
+            }
         }
         result = sB.toString();
         return result;
