@@ -17,43 +17,37 @@ public class WeatherForecast {
 
             // adding 1 celsius degree to current value
             // as a temporary weather forecast
-            resultMap.put(temperature.getKey(), temperature.getValue() + 1.0); // [1]
+            resultMap.put(temperature.getKey(), temperature.getValue() + 1.0);
         }
         return resultMap;
     }
 
     public double calculateAverageTemperature() {
-        List<Double> results = new ArrayList<>();
-        double average = 0;
         double sum = 0;
         for (Map.Entry<String, Double> temperature :
                 temperatures.getTemperatures().entrySet()) {
-            results.add(temperature.getValue());
+            sum += temperature.getValue();
         }
-        for (int i = 0; i < results.size() ; i++) {
-            sum += results.get(i);
-        }
-        return sum/results.size();
+
+        return sum / temperatures.getTemperatures().entrySet().size();
     }
-
-
 
 
     public double calculateMedianTemperature() {
 
-        double median = 0.0;
+        double median;
         List<Double> results = new ArrayList<>();
         for (Map.Entry<String, Double> temperature :
                 temperatures.getTemperatures().entrySet()) {
             results.add(temperature.getValue());
         }
-       Collections.sort(results);
+        Collections.sort(results);
         System.out.println(results);
         if (results.size() % 2 != 0) {
-            median = results.get(((results.size() + -1)/2));
+            median = results.get(((results.size() + -1) / 2));
         } else {
-            double medavg = (results.get((results.size() / 2))) + (results.get((results.size() /2 -1)));
-            median = medavg/(double) 2;
+            double medavg = (results.get((results.size() / 2))) + (results.get((results.size() / 2 - 1)));
+            median = medavg / 2;
         }
         return median;
     }

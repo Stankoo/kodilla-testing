@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
@@ -52,9 +51,8 @@ class WeatherForecastTestSuite {
         temperaturesMap.put("Warszawa", 25.2);
         temperaturesMap.put("Gdansk", 26.1);
         double sum = 25.5 + 26.2 + 24.8 + 25.2 + 26.1;
-        String s = String.format(new Locale("en"), "%f", sum);
-        sum = Double.parseDouble(s);
-        result = (sum / 5);
+
+        result = sum / 5;
         when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
@@ -62,7 +60,7 @@ class WeatherForecastTestSuite {
         double averageTemperature = weatherForecast.calculateAverageTemperature();
 
         //Then
-        Assertions.assertEquals(result, averageTemperature);
+        Assertions.assertEquals(result, averageTemperature,4);
     }
 
     @Test
