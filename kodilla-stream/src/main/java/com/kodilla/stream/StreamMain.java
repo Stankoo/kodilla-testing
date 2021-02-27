@@ -16,7 +16,7 @@ public class StreamMain {
             return  poem;
         };
         poemBeautifier.beautify("poem", poemDotter);
-        poemBeautifier.beautify("poem", poem -> "Beginning: " + poem);
+        poemBeautifier.beautify("poem", poem -> "Start: " + poem);
 
     }
 }
