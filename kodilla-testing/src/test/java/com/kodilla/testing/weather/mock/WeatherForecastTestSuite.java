@@ -15,6 +15,16 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class WeatherForecastTestSuite {
+public Map generateData(){
+    Map<String, Double> temperaturesMap = new HashMap<>();
+    temperaturesMap.put("Rzeszow", 25.5);
+    temperaturesMap.put("Krakow", 26.2);
+    temperaturesMap.put("Wroclaw", 24.8);
+    temperaturesMap.put("Warszawa", 25.2);
+    temperaturesMap.put("Gdansk", 26.1);
+    return temperaturesMap;
+
+}
 
     @Mock
     private Temperatures temperaturesMock;
@@ -24,13 +34,8 @@ class WeatherForecastTestSuite {
     @Test
     void testCalculateForecastWithMock() {
         //Given
-        Map<String, Double> temperaturesMap = new HashMap<>();
-        temperaturesMap.put("Rzeszow", 25.5);
-        temperaturesMap.put("Krakow", 26.2);
-        temperaturesMap.put("Wroclaw", 24.8);
-        temperaturesMap.put("Warszawa", 25.2);
-        temperaturesMap.put("Gdansk", 26.1);
-        when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
+        generateData();
+        when(temperaturesMock.getTemperatures()).thenReturn(generateData());
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
@@ -44,16 +49,11 @@ class WeatherForecastTestSuite {
     void testCalculateAverageTemperature() {
         //Given
         double result = 0.0;
-        Map<String, Double> temperaturesMap = new HashMap<>();
-        temperaturesMap.put("Rzeszow", 25.5);
-        temperaturesMap.put("Krakow", 26.2);
-        temperaturesMap.put("Wroclaw", 24.8);
-        temperaturesMap.put("Warszawa", 25.2);
-        temperaturesMap.put("Gdansk", 26.1);
+        generateData();
         double sum = 25.5 + 26.2 + 24.8 + 25.2 + 26.1;
 
         result = sum / 5;
-        when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
+        when(temperaturesMock.getTemperatures()).thenReturn(generateData());
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
@@ -66,38 +66,27 @@ class WeatherForecastTestSuite {
     @Test
     void testCalculateMedianTemperatureEven() {
         //Given
-        Map<String, Double> temperaturesMap = new HashMap<>();
-        temperaturesMap.put("Rzeszow", 25.5);
-        temperaturesMap.put("Krakow", 26.2);
-        temperaturesMap.put("Wroclaw", 24.8);
-        temperaturesMap.put("Warszawa", 25.2);
-        temperaturesMap.put("Gdansk", 26.1);
-        temperaturesMap.put("dujaj", 25.7);
-        when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
+        generateData();
+        when(temperaturesMock.getTemperatures()).thenReturn(generateData());
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
         double result = weatherForecast.calculateMedianTemperature();
 
         //Then
-        Assertions.assertEquals(25.6, result);
+        Assertions.assertEquals(25.56, result,4);
     }
     @Test
     void testCalculateMedianTemperatureOdds() {
         //Given
-        Map<String, Double> temperaturesMap = new HashMap<>();
-        temperaturesMap.put("Rzeszow", 25.5);
-        temperaturesMap.put("Krakow", 26.2);
-        temperaturesMap.put("Wroclaw", 24.8);
-        temperaturesMap.put("Warszawa", 25.2);
-        temperaturesMap.put("Gdansk", 26.1);
-        when(temperaturesMock.getTemperatures()).thenReturn(temperaturesMap);
+        generateData();
+        when(temperaturesMock.getTemperatures()).thenReturn(generateData());
         WeatherForecast weatherForecast = new WeatherForecast(temperaturesMock);
 
         //When
         double result = weatherForecast.calculateMedianTemperature();
 
         //Then
-        Assertions.assertEquals(25.5, result);
+        Assertions.assertEquals(25.5, result,4);
     }
 }
