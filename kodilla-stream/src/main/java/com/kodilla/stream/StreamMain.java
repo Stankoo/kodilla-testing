@@ -1,5 +1,7 @@
 package com.kodilla.stream;
 
+import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.beautifier.PoemDecorator;
 import com.kodilla.stream.forumuser.Forum;
 import com.kodilla.stream.forumuser.ForumUser;
 
@@ -11,7 +13,23 @@ import static java.time.LocalDate.now;
 public class StreamMain {
 
     public static void main(String[] args) {
-        Forum forum = new Forum();
+        PoemBeautifier poemBeautifier = new PoemBeautifier();
+
+        poemBeautifier.beautify("poem", poem -> "ABC" + poem + "ABC");
+        poemBeautifier.beautify("poem", String::toUpperCase);
+        PoemDecorator poemDotter = poem -> {
+            if ( !poem.endsWith(".") ) {
+                poem = poem + ".";
+            }
+            return  poem;
+        };
+        poemBeautifier.beautify("poem", poemDotter);
+        poemBeautifier.beautify("poem", poem -> "Beginning: " + poem);
+
+
+
+
+    Forum forum = new Forum();
         Map<Integer, ForumUser> theResultUserList = forum.getUserList().stream()
                 .filter(forumUser -> forumUser.getSex() == 'M')
                 .filter(forumUser -> forumUser.getBirthdate().isBefore(now().minusYears(20)))
