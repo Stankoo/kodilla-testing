@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -63,18 +65,33 @@ class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
-        List<TaskList> inProgressTasks = new ArrayList<>();               // [1]
-        inProgressTasks.add(new TaskList("In progress"));                 // [2]
-        long longTasks = project.getTaskLists().stream()                  // [3]
-                .filter(inProgressTasks::contains)                             // [4]
-                .flatMap(tl -> tl.getTasks().stream())                         // [5]
-                .map(Task::getCreated)                                         // [6]
-                .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)  // [7]
-                .count();                                                      // [8]
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        long longTasks = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(Task::getCreated)
+                .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
+                .count();
 
         //Then
-        assertEquals(2, longTasks);                                       // [9]
+        assertEquals(2, longTasks);
     }
+    @Test
+    public void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+        OptionalDouble averageNumberOfDays = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .mapToInt(t -> (int) DAYS.between(t.getCreated(), LocalDate.now()))
+                .average();
+    }
+
     private Board prepareTestData() {
         //users
         User user1 = new User("developer1", "John Smith");
