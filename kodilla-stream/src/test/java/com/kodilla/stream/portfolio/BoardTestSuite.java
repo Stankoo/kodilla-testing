@@ -90,6 +90,8 @@ class BoardTestSuite {
                 .flatMap(tl -> tl.getTasks().stream())
                 .mapToInt(t -> (int) DAYS.between(t.getCreated(), LocalDate.now()))
                 .average();
+        //Then
+        assertEquals(OptionalDouble.of(10.0), averageNumberOfDays);
     }
 
     private Board prepareTestData() {
