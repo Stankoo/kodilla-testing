@@ -7,7 +7,7 @@ class ExceptionHandling {
         SecondChallenge secondChallenge = new SecondChallenge();
 
         try {
-            System.out.println(secondChallenge.probablyIWillThrowException(0.9, 1.6));
+            System.out.println(secondChallenge.probablyIWillThrowException(0.5, 1.5));
         } catch (Exception e) {
             System.out.println("Exception has been found! " + e);
         } finally {

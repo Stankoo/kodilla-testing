@@ -12,7 +12,7 @@ class FileReaderTestSuite {
         // given
         FileReader fileReader = new FileReader();
         // when & then
-        assertDoesNotThrow((Executable) fileReader::readFile);
+        assertDoesNotThrow((Executable) () -> fileReader.readFile());
     }
     @Test
     void whenFileDosentExistsReadFileShouldThrowException() {
