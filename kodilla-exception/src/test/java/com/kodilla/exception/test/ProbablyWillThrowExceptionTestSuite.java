@@ -16,21 +16,28 @@ public class ProbablyWillThrowExceptionTestSuite {
     }
 
     @Test
-    void testx2() {
+    void testxEquals2() {
         // given
         SecondChallenge secondChallenge = new SecondChallenge();
         // when & then
         assertThrows(Exception.class, ()->secondChallenge.probablyIWillThrowException(2.0, 1.0));
     }
     @Test
-    void testx1() {
+    void testxLessThan1() {
+        // given
+        SecondChallenge secondChallenge = new SecondChallenge();
+        // when & then
+        assertThrows(Exception.class, ()->secondChallenge.probablyIWillThrowException(0.6, 1.0));
+    }
+    @Test
+    void testxEquals1() {
         // given
         SecondChallenge secondChallenge = new SecondChallenge();
         // when & then
         assertDoesNotThrow((Executable) ()->secondChallenge.probablyIWillThrowException(1.0, 2.0));
     }
     @Test
-    void testy1() {
+    void testyEquals1andHalf() {
         // given
         SecondChallenge secondChallenge = new SecondChallenge();
         // when & then
